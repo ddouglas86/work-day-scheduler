@@ -1,9 +1,9 @@
 var todaysDate = moment();
-var currentTime = moment();
+var currentTime = moment().hour();
 var todayElement = $('#currentDay');
 var containerEl = $('.container');
 var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-currentTime = currentTime.format('HH');
+
 
 // Display's Today's Date
 todayElement.text(todaysDate.format('dddd, MMMM Do'));
@@ -34,10 +34,20 @@ function displayTimeBlocks() {
    rowBlock.append(textInput);
    rowBlock.append(saveBtn);
    saveBtn.append(saveIcon);
+
+   //colors the time slots based on current time
+   if (currentTime > hours[i]) {
+     textInput.addClass('past')
+   }
+   else if (currentTime < hours[i]) {
+     textInput.addClass('future')
+   }
+   else {
+     textInput.addClass('present')
+   };
    
   };
 };
-
 
 
 displayTimeBlocks();
