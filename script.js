@@ -4,9 +4,6 @@ var todayElement = $('#currentDay');
 var containerEl = $('.container');
 var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-
-
-
 // Display's Today's Date
 todayElement.text(todaysDate.format('dddd, MMMM Do'));
 
@@ -20,7 +17,8 @@ function displayTimeBlocks() {
     var textInput = $('<textarea>');
     var saveBtn = $('<button>');
     var saveIcon = $('<i>');
-
+    //gets any stored info
+    var userStored = localStorage.getItem(hours[i]);
 
     //adds classes to tags for time slot stylings
     rowBlock.addClass('row time-block');
@@ -38,6 +36,9 @@ function displayTimeBlocks() {
     rowBlock.append(saveBtn);
     saveBtn.append(saveIcon);
 
+    //adds stored info if available
+    textInput.text(userStored);
+
     //colors the time slots based on current time
     if (currentTime > hours[i]) {
       textInput.addClass('past')
@@ -48,8 +49,6 @@ function displayTimeBlocks() {
     else {
       textInput.addClass('present')
     };
-
-    
 
   };
   
@@ -66,7 +65,5 @@ function displayTimeBlocks() {
     }
 
 };
-
-
 
 displayTimeBlocks();
